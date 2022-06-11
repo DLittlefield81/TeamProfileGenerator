@@ -7,9 +7,9 @@ Build a command-line application that accepts user input
 Input Team information
 - Manager
 👍- team manager’s name, employee ID, email address, and office number
-- Engineer
+👍 Engineer
 -- engineer’s name, ID, email, and GitHub username
-- Intern
+👍 Intern
 -- intern’s name, ID, email, and school
 
 **Hyperlink 
