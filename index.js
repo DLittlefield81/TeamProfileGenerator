@@ -4,91 +4,168 @@ const fs = require('fs');
 const path = require('path');
 const jest = require('jest');
 
-// TODO: Create an array of questions for user input
+// Constructors
+const Employee = require('./lib/Employee');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+
+// Create empty arrays for team and id as place holders
+const teamArr = [];
+const idArr = [];
 
 
-
-  function Manager(){
-    //Manager
-  createManager[
-    {
-        message: "Manager Name:",
-        type: "input",
-        name: "manager_name",
-    },
-    {
-        message: "Manager Employee ID:",
-        type: "input",
-        name: "manager_ID",
-    },
-    {
-        message: "Manager Email Address:",
-        type: "input",
-        name: "manager_email",
-    },
-    {
-        message: "Office Number:",
-        type: "input",
-        name: "managers_office_number",
-    }]
+//Manager
+function addManager() {
+    inquirer.prompt([
+        {
+            message: "Manager Name:",
+            type: "input",
+            name: "managerName"
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter a valid name:";
+            }
+        },
+        {
+            message: "Manager ID:",
+            type: "input",
+            name: "managerId",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter a valid ID.";
+            }
+        },
+        {
+            message: "Manager Email:",
+            type: "input",
+            name: "managerEmail",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Email address can't be empty.";
+            }
+        },
+        {
+            message: "Office Number:",
+            type: "input",
+            name: "managerOfficeNumber",
+        }]).then(answers => {
+            const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+            teamArr.push(manager);
+            idArr.push(answers.managerId);
+            addTeam();
+        });
 }
-    
-  //CREATE EMPLOYEE MENU
-  function Options() {
+
+//CREATE EMPLOYEE MENU
+function Options() {
     userOptions[{
-      message: "Add employee to directory:",
-      type: "list",
-      choices: ['Engineer', 'Intern', '>>Exit<<'],
-      name: "menu",
+        message: "Add employee to directory:",
+        type: "list",
+        choices: ['Engineer', 'Intern', '>>Exit<<'],
+        name: "menu",
     }]
 }
-  
- function Engineer() {
-     createEngineer[
-    //Engineer
-    {
-        message: "Engineer Name:",
-        type: "input",
-        name: "engineer_name",
-    },
-    {
-        message: "Engineer Employee ID:",
-        type: "input",
-        name: "engineer_ID",
-    },
-    {
-        message: "Engineer Email Address:",
-        type: "input",
-        name: "engineer_email",
-    },
-     {
-         message: "Engineer GitHub Username:",
-         type: "input",
-         name: "engineer_github",
-     }]
+//Engineer
+function addEngineer() {
+    inquirer.prompt([
+
+        {
+            message: "Engineer Name:",
+            type: "input",
+            name: "engineerName",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter a valid name:";
+            }
+        },
+        {
+            message: "Engineer Employee ID:",
+            type: "input",
+            name: "engineerId",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter a valid ID.";
+            }
+        },
+        {
+            message: "Engineer Email Address:",
+            type: "input",
+            name: "engineerEmail",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Email address can't be empty.";
+            }
+        },
+        {
+            message: "Engineer GitHub Username:",
+            type: "input",
+            name: "engineerGithub",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter the engineer's GitHub username.";
+            }
+        }]).then(answers => {
+            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+            teamArr.push(engineer);
+            idArr.push(answers.engineerId);
+            addTeam();
+        });
 }
-function Intern() {
-    createIntern[
-        //Intern
+//Intern
+function addIntern() {
+    inquirer.prompt([
         {
             message: "Intern Name:",
             type: "input",
             name: "intern_name",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter a valid name:";
+            }
         }, {
             message: "Intern Employee ID:",
             type: "input",
             name: "intern_ID",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter a valid ID.";
+            }
         }, {
             message: "Intern Email Address:",
             type: "input",
             name: "intern_email",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Email address can't be empty.";
+            }
         }, {
             message: "Intern School:",
             type: "input",
             name: "intern_school",
-        }]
+        }])
 }
-    
+
 
 
 
