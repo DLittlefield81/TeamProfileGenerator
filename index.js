@@ -14,7 +14,8 @@ const Intern = require('./lib/Intern');
 const teamArr = [];
 const idArr = [];
 
-function initApp() {
+function init() {
+    addManager();
     //Manager
     function addManager() {
         console.log("Crete Manager Profile");
@@ -62,29 +63,10 @@ function initApp() {
                 idArr.push(answers.managerId);
                 mainMenu();
             });
+
     }
 
-    //MAIN MENU
-    function mainMenu() {
-        inquirer.prompt([
-            {
-                message: "Add employee to directory:",
-                type: "list",
-                choices: ['Engineer', 'Intern', '>>Exit: Finish building my team <<'],
-                name: "menu",
-            }]).then(userChoice => {
-                switch (userChoice.memberChoice) {
-                    case "Engineer":
-                        addEngineer();
-                        break;
-                    case "Intern":
-                        addIntern();
-                        break;
-                    default:
-                      // Builder ;
-                } })
-    }
-    }
+
     //Engineer
     function addEngineer() {
         console.log("Crete Engineer Profile");
@@ -183,9 +165,33 @@ function initApp() {
                 teamArr.push(intern);
                 idArr.push(answers.internId);
                 mainMenu();
-            });
+            }
+            );
     }
+    //MAIN MENU
+    function mainMenu() {
+        inquirer.prompt([
+            {
+                message: "Add employee to directory:",
+                type: "list",
+                choices: ['Engineer', 'Intern', '>>Exit: Finish building my team <<'],
+                name: "mainMenu",
+            }]).then(userChoice => {
+                switch (userChoice.mainMenu) {
+                    case "Engineer":
+                        addEngineer();
+                        break;
+                    case "Intern":
+                        addIntern();
+                        break;
+                    default:
+                    // Builder ;
+                }
+            })
+    }
+
 }
+
 
 
 
@@ -211,5 +217,6 @@ function initApp() {
 // }
 
 // Function call to initialize app
+
 init();
 
