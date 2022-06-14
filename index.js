@@ -10,6 +10,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
+const outputPath = path.join("./dist/", 'index.html');
 // Create empty arrays for team and id as place holders
 const teamArr = [];
 const idArr = [];
@@ -19,50 +20,50 @@ function init() {
     //Manager
     function addManager() {
         console.log("Crete Manager Profile");
-        inquirer.prompt([
-            {
-                message: "Manager Name:",
-                type: "input",
-                name: "managerName",
-                validate: answer => {
-                    if (answer !== "") {
-                        return true;
-                    }
-                    return "Please enter a valid name:";
+        inquirer.prompt([{
+            message: "Manager Name:",
+            type: "input",
+            name: "managerName",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
                 }
-            },
-            {
-                message: "Manager ID:",
-                type: "input",
-                name: "managerId",
-                validate: answer => {
-                    if (answer !== "") {
-                        return true;
-                    }
-                    return "Please enter a valid ID.";
+                return "Please enter a valid name:";
+            }
+        },
+        {
+            message: "Manager ID:",
+            type: "input",
+            name: "managerId",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
                 }
-            },
-            {
-                message: "Manager Email:",
-                type: "input",
-                name: "managerEmail",
-                validate: answer => {
-                    if (answer !== "") {
-                        return true;
-                    }
-                    return "Email address can't be empty.";
+                return "Please enter a valid ID.";
+            }
+        },
+        {
+            message: "Manager Email:",
+            type: "input",
+            name: "managerEmail",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
                 }
-            },
-            {
-                message: "Office Number:",
-                type: "input",
-                name: "managerOfficeNumber",
-            }]).then(answers => {
-                const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
-                teamArr.push(manager);
-                idArr.push(answers.managerId);
-                mainMenu();
-            });
+                return "Email address can't be empty.";
+            }
+        },
+        {
+            message: "Office Number:",
+            type: "input",
+            name: "managerOfficeNumber",
+        }
+        ]).then(answers => {
+            const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+            teamArr.push(manager);
+            idArr.push(answers.managerId);
+            mainMenu();
+        });
 
     }
 
@@ -115,108 +116,91 @@ function init() {
                     }
                     return "Please enter the engineer's GitHub username.";
                 }
-            }]).then(answers => {
-                const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
-                teamArr.push(engineer);
-                idArr.push(answers.engineerId);
-                mainMenu();
-            });
+            }
+        ]).then(answers => {
+            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+            teamArr.push(engineer);
+            idArr.push(answers.engineerId);
+            mainMenu();
+        });
     }
     //Intern
     function addIntern() {
         console.log("Crete Intern Profile");
-        inquirer.prompt([
-            {
-                message: "Intern Name:",
-                type: "input",
-                name: "internName",
-                validate: answer => {
-                    if (answer !== "") {
-                        return true;
-                    }
-                    return "Please enter a valid name:";
+        inquirer.prompt([{
+            message: "Intern Name:",
+            type: "input",
+            name: "internName",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
                 }
-            }, {
-                message: "Intern Employee ID:",
-                type: "input",
-                name: "internId",
-                validate: answer => {
-                    if (answer !== "") {
-                        return true;
-                    }
-                    return "Please enter a valid ID.";
-                }
-            }, {
-                message: "Intern Email Address:",
-                type: "input",
-                name: "internEmail",
-                validate: answer => {
-                    if (answer !== "") {
-                        return true;
-                    }
-                    return "Email address can't be empty.";
-                }
-            }, {
-                message: "Intern School:",
-                type: "input",
-                name: "internSchool",
-            }]).then(answers => {
-                const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
-                teamArr.push(intern);
-                idArr.push(answers.internId);
-                mainMenu();
+                return "Please enter a valid name:";
             }
-            );
+        }, {
+            message: "Intern Employee ID:",
+            type: "input",
+            name: "internId",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter a valid ID.";
+            }
+        }, {
+            message: "Intern Email Address:",
+            type: "input",
+            name: "internEmail",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Email address can't be empty.";
+            }
+        }, {
+            message: "Intern School:",
+            type: "input",
+            name: "internSchool",
+        }]).then(answers => {
+            const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+            teamArr.push(intern);
+            idArr.push(answers.internId);
+            mainMenu();
+        });
     }
     //MAIN MENU
     function mainMenu() {
-        inquirer.prompt([
-            {
-                message: "Add employee to directory:",
-                type: "list",
-                choices: ['Engineer', 'Intern', '>>Exit: Finish building my team <<'],
-                name: "mainMenu",
-            }]).then(userChoice => {
-                switch (userChoice.mainMenu) {
-                    case "Engineer":
-                        addEngineer();
-                        break;
-                    case "Intern":
-                        addIntern();
-                        break;
-                    default:
+        inquirer.prompt([{
+            message: "Add employee to directory:",
+            type: "list",
+            choices: ['Engineer', 'Intern', '>>Exit: Finish building my team <<'],
+            name: "mainMenu",
+        }]).then(userChoice => {
+            switch (userChoice.mainMenu) {
+                case "Engineer":
+                    addEngineer();
+                    break;
+                case "Intern":
+                    addIntern();
+                    break;
+                default:
                     // Builder ;
-                }
-            })
+                    generateHTML();
+            }
+        })
     }
 
+    function generateHTML(outputPath, teamArr) {
+        
+        fs.writeFileSync(outputPath, render(teamArr), function (err) {
+
+            if (err) {
+                return console.log(err)
+            } else {
+                console.log("Your Team Profile was successfully written")
+            }
+        })
+    };
 }
 
-
-
-
-// // TODO: Create a function to write README file
-// function writeFile(fileName, data) {
-//     fs.writeFile(fileName, data, function (err) {
-
-//         if (err) {
-//             return console.log(err)
-//         } else {
-//             console.log("Your README.md file was successfully written")
-//         }
-//     })
-// }
-
-
-// // TODO: Create a function to initialize app
-// function init() {
-//     inquirer.prompt(questions)
-//         .then(function (response) {
-//             //writeFile("./output/README.md", generateMarkdown(response))
-//         })
-// }
-
-// Function call to initialize app
-
 init();
-
