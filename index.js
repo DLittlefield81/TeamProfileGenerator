@@ -197,10 +197,10 @@ function init() {
 
          // Create dist directory for index.html if it doesnt exist
          if (!fs.existsSync(DIST_DIR)) {
-             fs.mkdirSync(DIST_DIR)
+             fs.mkdirSync(DIST_DIR) // Create dist directory
          }
          console.log("Building Your Team Profile.... Stand By... ");
-         fs.writeFileSync(outputPath, render(teamArr), "utf-8");
+         fs.writeFileSync(outputPath, render(teamArr), "utf-8"); // Write to index.html
      }
 }
 

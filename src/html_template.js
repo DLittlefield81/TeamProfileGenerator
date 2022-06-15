@@ -109,21 +109,21 @@ const createProfile = team => {
         `;
     };
 
-    const html = [];
+    const html = []; // Create an empty array to hold the HTML
 
     html.push(team
-        .filter(employee => employee.getRole() === 'Manager')
+        .filter(employee => employee.getRole() === 'Manager') // Filter out Managers
         .map(manager => addManager(manager))
     );
     html.push(team
-        .filter(employee => employee.getRole() === 'Engineer')
+        .filter(employee => employee.getRole() === 'Engineer') // Filter out Engineers
         .map(engineer => addEngineer(engineer))
-        .join("")
+        .join("") // join to existing cards
     );
     html.push(team
-        .filter(employee => employee.getRole() === 'Intern')
+        .filter(employee => employee.getRole() === 'Intern') // Filter out Interns
         .map(intern => addIntern(intern))
-        .join("")
+        .join("") // join to existing cards
     );
 
     return html.join("");
