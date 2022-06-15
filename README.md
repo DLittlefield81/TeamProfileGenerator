@@ -41,7 +41,7 @@ Follow these steps to install this project on your local machine.
 ## Images
 - -![TeamProfileGenerator](./assets/images/TeamProfileGenerator.gif)
 - [CLICK HERE TO VIEW FULL VIDEO](./assets/images/TeamProfileGenerator.webm)
-
+- Google Drive URL https://drive.google.com/file/d/1kQz63YE_yNB2Dz-1mlWQjhwNtOE8F3Yx/view
 
 ## Tests
 - node run test
