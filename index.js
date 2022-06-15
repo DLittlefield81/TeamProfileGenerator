@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
-const jest = require('jest');
+
 
 // Constructors
 const Employee = require('./lib/Employee');
@@ -10,7 +10,10 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const outputPath = path.join("./dist/", 'index.html');
+const DIST_DIR = path.resolve(__dirname, 'dist')
+const outputPath = path.join(DIST_DIR, 'index.html');
+
+const render = require('./src/html_template.js');
 // Create empty arrays for team and id as place holders
 const teamArr = [];
 const idArr = [];
@@ -185,22 +188,20 @@ function init() {
                     break;
                 default:
                     // Builder ;
-                    generateHTML();
+                    renderHTML();
             }
         })
     }
 
-    function generateHTML(outputPath, teamArr) {
-        
-        fs.writeFileSync(outputPath, render(teamArr), function (err) {
+     function renderHTML() {
 
-            if (err) {
-                return console.log(err)
-            } else {
-                console.log("Your Team Profile was successfully written")
-            }
-        })
-    };
+         // Create dist directory for index.html if it doesnt exist
+         if (!fs.existsSync(DIST_DIR)) {
+             fs.mkdirSync(DIST_DIR)
+         }
+         console.log("Building Your Team Profile.... Stand By... ");
+         fs.writeFileSync(outputPath, render(teamArr), "utf-8");
+     }
 }
 
 init();
